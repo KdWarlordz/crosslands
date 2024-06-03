@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "types": ["vite/client", "jest"],
+    "paths": {
+      "~scene/*": ["./src/game/scenes/*"],
+      "~lib/*": ["./src/lib/*"]
+    }
+  },
+  "exclude": [
+    "./src/**/__tests__/**",
+    "./src/**/__mocks__/**"
+  ]
+}

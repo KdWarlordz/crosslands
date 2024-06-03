@@ -1,0 +1,68 @@
+{
+  "name": "crosslands",
+  "description": "Buy, Own, and Build on your own land in the Crosslands",
+  "version": "0.0.1",
+  "keywords": [
+    "game",
+    "isometric",
+    "ownership",
+    "build",
+    "open-world",
+    "phaser"
+  ],
+  "license": "GPL-3.0",
+  "author": {
+    "name": "kdlabs",
+    "email": "info@kdlabs.com",
+    "url": "http://www.x.com/kdlabs"
+  },
+  "main": "./dist/index.html",
+  "scripts": {
+    "start": "vite --host",
+    "build": "vite build",
+    "test": "jest",
+    "lint": "eslint \"./**/*.{ts,tsx}\" --ignore-path .gitignore --fix"
+  },
+  "devDependencies": {
+    "@types/heap": "0.2.33",
+    "@types/jest": "29.5.12",
+    "@types/node": "20.11.17",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "18.2.19",
+    "@types/styled-components": "5.1.29",
+    "@types/uuid": "9.0.6",
+    "@typescript-eslint/eslint-plugin": "7.0.1",
+    "@typescript-eslint/parser": "7.0.1",
+    "@vitejs/plugin-react": "4.2.1",
+    "alias-reuse": "2.0.0",
+    "eslint": "8.56.0",
+    "eslint-plugin-import": "2.29.1",
+    "jest": "29.7.0",
+    "jest-canvas-mock": "2.5.2",
+    "jest-environment-jsdom": "29.7.0",
+    "phaser3spectorjs": "0.0.8",
+    "ts-jest": "29.1.2",
+    "typescript": "5.3.3",
+    "vite": "5.1.1",
+    "vite-plugin-checker": "0.6.4",
+    "vite-plugin-static-copy": "0.17.1"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "events": "3.3.0",
+    "gen-biome": "2.4.1",
+    "heap": "0.2.7",
+    "idb": "7.1.1",
+    "phaser": "3.60.0",
+    "phaser-react-ui": "1.14.5",
+    "phaser3-rex-plugins": "1.60.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "styled-components": "6.1.0",
+    "uuid": "9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neki-dev/izowave.git"
+  }
+}

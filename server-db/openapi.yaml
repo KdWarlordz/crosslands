@@ -1,0 +1,386 @@
+openapi: 3.0.0
+info:
+  title: Crossland Service API
+  version: 1.0.0
+  description: API for fetching and posting map matrix data for different blockchains and planets.
+servers:
+  - url: http://localhost:8888
+paths:
+  /api/health:
+    get:
+      summary: Health Check
+      description: Checks if the API is up and running.
+      responses:
+        '200':
+          description: API is running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "*** Crossland API is up and running ***"
+  /api/chains/{chain}/{planet}/{id}:
+    get:
+      summary: Get Map Matrix Data
+      description: Fetches map matrix data for the specified chain, planet, and ID.
+      parameters:
+        - in: path
+          name: chain
+          schema:
+            type: string
+            enum: [kadena, aptos, alephium, sui, solana, ethereum]
+          required: true
+          description: The blockchain to query.
+        - in: path
+          name: planet
+          schema:
+            type: string
+            enum: [earth, moon, mars]
+          required: true
+          description: The planet to query.
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the map.
+      responses:
+        '200':
+          description: Map matrix data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  seed:
+                    type: array
+                    items:
+                      type: number
+                  matrix:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          tileIndex:
+                            type: integer
+                          z:
+                            type: integer
+                          collide:
+                            type: boolean
+                          solid:
+                            type: boolean
+                          spawn:
+                            type: array
+                            items:
+                              type: string
+        '404':
+          description: Data not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Data not found
+  /api/addworld:
+    post:
+      summary: Add Map Matrix Data
+      description: Adds new map matrix data to the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chain:
+                  type: string
+                  enum: [kadena, aptos, alephium, sui, solana, ethereum]
+                planet:
+                  type: string
+                  enum: [earth, moon, mars]
+                id:
+                  type: string
+                seed:
+                  type: array
+                  items:
+                    type: number
+                matrix:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        tileIndex:
+                          type: integer
+                        z:
+                          type: integer
+                        collide:
+                          type: boolean
+                        solid:
+                          type: boolean
+                        spawn:
+                          type: array
+                          items:
+                            type: string
+      responses:
+        '201':
+          description: Map matrix data added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chain:
+                    type: string
+                    enum: [kadena, aptos, alephium, sui, solana, ethereum]
+                  planet:
+                    type: string
+                    enum: [earth, moon, mars]
+                  id:
+                    type: string
+                  seed:
+                    type: array
+                    items:
+                      type: number
+                  matrix:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          tileIndex:
+                            type: integer
+                          z:
+                            type: integer
+                          collide:
+                            type: boolean
+                          solid:
+                            type: boolean
+                          spawn:
+                            type: array
+                            items:
+                              type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+  /api/config:
+    get:
+      summary: Get Config
+      description: Fetches the current configuration.
+      responses:
+        '200':
+          description: Current configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                  chains:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        url:
+                          type: string
+                  worlds:
+                    type: array
+                    items:
+                      type: string
+                      enum: [earth, mars, moon]
+                  availableCrosslands:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chainname:
+                          type: string
+                        world:
+                          type: string
+                          enum: [earth, mars, moon]
+                        mapid:
+                          type: string
+                        openingsTime:
+                          type: string
+                          format: date-time
+                        sellDate:
+                          type: string
+                          format: date-time
+                        sellClose:
+                          type: string
+                          format: date-time
+                  activeChain:
+                    type: string
+        '404':
+          description: Config not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Config not found
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+    post:
+      summary: Update Config
+      description: Updates the current configuration.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: string
+                chains:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      url:
+                        type: string
+                worlds:
+                  type: array
+                  items:
+                    type: string
+                    enum: [earth, mars, moon]
+                availableCrosslands:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      chainname:
+                        type: string
+                      world:
+                        type: string
+                        enum: [earth, mars, moon]
+                      mapid:
+                        type: string
+                      openingsTime:
+                        type: string
+                        format: date-time
+                      sellDate:
+                        type: string
+                        format: date-time
+                      sellClose:
+                        type: string
+                        format: date-time
+                activeChain:
+                  type: string
+      responses:
+        '201':
+          description: Config updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                  chains:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        url:
+                          type: string
+                  worlds:
+                    type: array
+                    items:
+                      type: string
+                      enum: [earth, mars, moon]
+                  availableCrosslands:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        chainname:
+                          type: string
+                        world:
+                          type: string
+                          enum: [earth, mars, moon]
+                        mapid:
+                          type: string
+                        openingsTime:
+                          type: string
+                          format: date-time
+                        sellDate:
+                          type: string
+                          format: date-time
+                        sellClose:
+                          type: string
+                          format: date-time
+                  activeChain:
+                    type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error
+  /api/routes:
+    get:
+      summary: List all routes
+      description: Lists all available routes in the API.
+      responses:
+        '200':
+          description: List of routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Internal Server Error

@@ -1,0 +1,32 @@
+{
+    "version": "1.0",
+    "chains": [
+      { "name": "kadena", "url": "https://kadena.io" },
+      { "name": "aptos", "url": "https://aptos.io" },
+      { "name": "solana", "url": "https://solana.io" },
+      { "name": "ethereum", "url": "https://ethereum.org" },
+      { "name": "alephium", "url": "https://alephium.org" },
+      { "name": "sui", "url": "https://sui.io" }
+    ],
+    "worlds": ["earth", "mars", "moon"],
+    "availableCrosslands": [
+      {
+        "chain": "kadena",
+        "world": "earth",
+        "id": "px0401xa",
+        "openingsTime": "2023-01-01T00:00:00.000Z",
+        "sellDate": "2023-02-01T00:00:00.000Z",
+        "sellClose": "2023-03-01T00:00:00.000Z"
+      },
+      {
+        "chain": "solana",
+        "world": "mars",
+        "id": "sx0401xa",
+        "openingsTime": "2023-04-01T00:00:00.000Z",
+        "sellDate": "2023-05-01T00:00:00.000Z",
+        "sellClose": "2023-06-01T00:00:00.000Z"
+      }
+    ],
+    "activeChain": "kadena"
+  }
+  
